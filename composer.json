@@ -1,0 +1,50 @@
+{
+    "name": "superbig/craft3-restrict",
+    "description": "Restrict access to the CP based on a IP whitelist",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "restrict"
+    ],
+    "support": {
+        "docs": "https://github.com/sjelfull/craft3-restrict/blob/master/README.md",
+        "issues": "https://github.com/sjelfull/craft3-restrict/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Superbig",
+            "homepage": "https://superbig.co"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "~3.0.0-beta.23"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "superbig\\restrict\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Restrict",
+        "handle": "restrict",
+        "schemaVersion": "2.0.0",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/sjelfull/craft3-restrict/master/CHANGELOG.md",
+        "components": {
+            "restrictService": "superbig\\restrict\\services\\RestrictService"
+        },
+        "class": "superbig\\restrict\\Restrict"
+    }
+}

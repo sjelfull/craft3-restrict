@@ -53,7 +53,9 @@ class Restrict extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        $this->restrictService->check();
+        if (Craft::$app->getRequest()->isCpRequest) {
+            $this->restrictService->check();
+        }
 
         Craft::info(
             Craft::t(

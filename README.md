@@ -29,7 +29,7 @@ To install the plugin, follow these instructions.
 return [
     'enabled'     => true,
 
-    // Add any IPs you want to be able to access the CP
+    // Add any IPs you want to be able to access the CP. You can also use CIDR notation such as 192.168.0.0/24
     'ipWhitelist' => [ '::1', '127.0.0.1' ],
 
     // Logged in admins can bypass the whitelist

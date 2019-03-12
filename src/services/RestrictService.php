@@ -16,6 +16,7 @@ use superbig\restrict\Restrict;
 
 use Craft;
 use craft\base\Component;
+use Dxw\CIDR\IP;
 
 /**
  * @author    Superbig
@@ -49,7 +50,25 @@ class RestrictService extends Component
                 return true;
             }
 
-            if ( count($whitelist) > 0 && !in_array($ip, $whitelist) ) {
+            // If whitelist has one or more IP address values, check the array
+            if ( count($whitelist) > 0 ) {
+
+                foreach ($whitelist as $address) {
+
+                    $result = IP::contains($address, $ip);
+
+                    if ( $result->isErr() ) {
+                        throw new \Exception(Craft::t('restrict', 'A malformed IP address value was found in the whitelist.'));
+                    }
+
+                    $match = $result->unwrap();
+
+                    // The current IP address matched a value in the whitelist
+                    if ( $match ) {
+                        return true;
+                    }
+                }
+
                 // Should we redirect?
                 if ( !empty($redirectUrl) ) {
                     Craft::$app->response->redirect($redirectUrl);

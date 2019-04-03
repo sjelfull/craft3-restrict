@@ -11,6 +11,8 @@
 namespace superbig\restrict\services;
 
 use craft\web\View;
+use ErrorException;
+use yii\web\HttpException;
 use superbig\restrict\models\Settings;
 use superbig\restrict\Restrict;
 
@@ -41,8 +43,8 @@ class RestrictService extends Component
             $allowAdmins = $settings->allowAdmins;
 
             // Check for CloudFlare IP
-            if ( isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ) {
-                $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
+            if ( isset($_SERVER['HTTP_CF_CONNECTING_IP']) ) {
+                $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
             }
 
             // Skip for admins if enabled
@@ -53,12 +55,12 @@ class RestrictService extends Component
             // If whitelist has one or more IP address values, check the array
             if ( count($whitelist) > 0 ) {
 
-                foreach ($whitelist as $address) {
+                foreach ( $whitelist as $address ) {
 
                     $result = IP::contains($address, $ip);
 
                     if ( $result->isErr() ) {
-                        throw new \Exception(Craft::t('restrict', 'A malformed IP address value was found in the whitelist.'));
+                        throw new ErrorException(Craft::t('restrict', 'A malformed IP address value was found in the whitelist.'));
                     }
 
                     $match = $result->unwrap();
@@ -88,7 +90,7 @@ class RestrictService extends Component
                     Craft::$app->end();
                 }
                 else {
-                    throw new \Exception(Craft::t('restrict', 'Access to the control panel is restricted.'));
+                    throw new HttpException(403, Craft::t('restrict', 'Access to the control panel is restricted.'));
                 }
             }
         }

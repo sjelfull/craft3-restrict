@@ -2,7 +2,7 @@
     "name": "superbig/craft3-restrict",
     "description": "Restrict access to the CP based on a IP whitelist",
     "type": "craft-plugin",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "keywords": [
         "craft",
         "cms",

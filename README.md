@@ -1,3 +1,5 @@
+>**Note: This plugin has been abandoned. Use [Knock Knock](https://github.com/verbb/knock-knock) as an alternative.**
+
 # Restrict plugin for Craft CMS 3.x
 
 Restrict access to the CP based on a IP whitelist
